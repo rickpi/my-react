@@ -6,18 +6,10 @@ const Trailers = () => (
     <h4 className="mt-3">Bandes Annonces</h4>
     <Carousel>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://static.hitek.fr/img/up_m/362459579/ob3a7b42thehobbit2.jpg"
-          alt="First slide"
-        />
+        <iframe title="firstSlide" height="400px" className="w-100" src="https://www.youtube.com/embed/tiy7peMH3g8" />
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://geeko.lesoir.be/wp-content/uploads/sites/58/2019/04/Avengers-Endgame.jpg"
-          alt="Second slide"
-        />
+        <iframe title="secondSlide" height="400px" className="w-100" src="https://www.youtube.com/embed/wV-Q0o2OQjQ" />
       </Carousel.Item>
     </Carousel>
   </div>
