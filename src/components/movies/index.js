@@ -5,15 +5,15 @@ import Movie from '../movie';
 
 const movies = [{
   title: 'Avatar',
-  category: 'Actions',
+  category: 'Aventure',
   image: 'https://lh3.googleusercontent.com/proxy/3FDWyQlBJbXvcIfnVTEjtHC7nhzOoxchEcizW01hN3Ge_OMDvfMpU_Xb4AFL-g0uImT8frEBIljW2DPP1wjzZnTyWojWO7A3o7ZjogU_UtdgxXna237Rr0fDtMkJR_4kr87CeXsP43pz02bJ',
 }, {
   title: 'Joker',
-  category: 'Thrillers',
+  category: 'Action',
   image: 'https://images-na.ssl-images-amazon.com/images/I/71RIznEEyRL._AC_SY679_.jpg',
 }, {
   title: 'The Dark Knight',
-  category: 'Actions',
+  category: 'Action',
   image: 'https://www.aetherium.fr/wpa/wp-content/uploads/2019/08/aetherium-semio-batman-affiche-2.jpg',
 }];
 
@@ -23,16 +23,16 @@ const Movies = () => (
     <Row>
       {movies.map((item) => <Movie data={item} />)}
     </Row>
-    <h4 className="mt-3">Actions</h4>
+    <h4 className="mt-3">Action</h4>
     <Row>
       {movies
-        .filter((item) => item.category === 'Actions')
+        .filter((item) => item.category === 'Action')
         .map((item) => <Movie data={item} />)}
     </Row>
-    <h4 className="mt-3">Thrillers</h4>
+    <h4 className="mt-3">Aventure</h4>
     <Row>
       {movies
-        .filter((item) => item.category === 'Thrillers')
+        .filter((item) => item.category === 'Aventure')
         .map((item) => <Movie data={item} />)}
     </Row>
   </div>
