@@ -19,17 +19,21 @@ const movies = [{
 
 const Movies = () => (
   <div>
-    <h4 className="mt-3">Bandes Annonces</h4>
+    <h4 className="mt-3">Movies Availables</h4>
     <Row>
       {movies.map((item) => <Movie data={item} />)}
     </Row>
     <h4 className="mt-3">Actions</h4>
     <Row>
-      {movies.filter((item) => item.category === 'Actions').map((item) => <Movie data={item} />)}
+      {movies
+        .filter((item) => item.category === 'Actions')
+        .map((item) => <Movie data={item} />)}
     </Row>
     <h4 className="mt-3">Thrillers</h4>
     <Row>
-      {movies.filter((item) => item.category === 'Thrillers').map((item) => <Movie data={item} />)}
+      {movies
+        .filter((item) => item.category === 'Thrillers')
+        .map((item) => <Movie data={item} />)}
     </Row>
   </div>
 );
