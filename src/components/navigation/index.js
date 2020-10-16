@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Film } from 'react-bootstrap-icons';
 import {
   Container,
   Navbar,
@@ -12,7 +12,10 @@ import {
 const Navigation = () => (
   <Navbar bg="dark" variant="dark">
     <Container>
-      <Navbar.Brand href="#home">MyMovies</Navbar.Brand>
+      <Navbar.Brand href="#home">
+        <Film className="mr-2" />
+        MyMovies
+      </Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="#home">Action</Nav.Link>
         <Nav.Link href="#features">Aventure</Nav.Link>
