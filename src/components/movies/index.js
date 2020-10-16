@@ -1,7 +1,10 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
-
-import Movie from '../movie';
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+} from 'react-bootstrap';
 
 const movies = [{
   title: 'Avatar',
@@ -17,23 +20,29 @@ const movies = [{
   image: 'https://www.aetherium.fr/wpa/wp-content/uploads/2019/08/aetherium-semio-batman-affiche-2.jpg',
 }];
 
-const Movies = () => (
+const Item = ({ data }) => {
+  const { title, image } = data;
+
+  return (
+    <Col xs="3">
+      <Card>
+        <Card.Img src={image} />
+        <Card.Body>
+          <Card.Title>{title}</Card.Title>
+          <Button variant="primary">Show</Button>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+};
+
+const Movies = ({ category }) => (
   <div>
-    <h4 className="mt-3">Movies Availables</h4>
-    <Row>
-      {movies.map((item) => <Movie data={item} />)}
-    </Row>
-    <h4 className="mt-3">Action</h4>
+    <h4 className="mt-3">{category}</h4>
     <Row>
       {movies
-        .filter((item) => item.category === 'Action')
-        .map((item) => <Movie data={item} />)}
-    </Row>
-    <h4 className="mt-3">Aventure</h4>
-    <Row>
-      {movies
-        .filter((item) => item.category === 'Aventure')
-        .map((item) => <Movie data={item} />)}
+        .filter((item) => item.category === category)
+        .map((item) => <Item data={item} />)}
     </Row>
   </div>
 );

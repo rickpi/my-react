@@ -6,7 +6,8 @@ const Main = () => (
   <div>
     <Trailers />
     <hr />
-    <Movies />
+    <Movies category="Action" />
+    <Movies category="Aventure" />
   </div>
 );
 
