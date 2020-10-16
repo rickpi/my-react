@@ -8,6 +8,7 @@ import {
 
 import Navigation from './components/navigation';
 import Main from './components/main';
+import Sidebar from './components/sidebar';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
@@ -21,7 +22,7 @@ const App = () => (
           <Main />
         </Col>
         <Col lg="3">
-          sidebar
+          <Sidebar />
         </Col>
       </Row>
     </Container>
