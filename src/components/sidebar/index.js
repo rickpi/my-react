@@ -1,8 +1,11 @@
 import React from 'react';
 
+import SignIn from '../signin';
+
 const Sidebar = () => (
   <div>
-    sidebar
+    <SignIn />
+    <hr />
   </div>
 );
 
