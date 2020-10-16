@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 
 import Navigation from './components/navigation';
+import Main from './components/main';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
@@ -17,7 +18,7 @@ const App = () => (
     <Container>
       <Row>
         <Col>
-          main
+          <Main />
         </Col>
         <Col lg="3">
           sidebar
