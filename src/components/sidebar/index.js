@@ -8,7 +8,7 @@ const Sidebar = () => (
   <div>
     <SignIn />
     <hr />
-    <Image className="mb-4" src="https://infiniteingenuity.files.wordpress.com/2015/03/skyscraper.jpg" fluid />
+    <Image src="https://infiniteingenuity.files.wordpress.com/2015/03/skyscraper.jpg" fluid />
   </div>
 );
 
