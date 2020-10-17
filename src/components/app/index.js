@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Container,
-  Row,
-  Col,
-} from 'react-bootstrap';
 
 import Navigation from '../navigation';
-import Main from '../main';
-import Sidebar from '../sidebar';
+import Routes from '../routes';
 
 const App = class App extends React.Component {
   constructor(props) {
@@ -29,14 +23,7 @@ const App = class App extends React.Component {
     return (
       <div>
         <Navigation handleSearch={this.handleSearch} />
-        <Container>
-          <Row>
-            <Main inputValue={inputValue} />
-            <Col xs="3">
-              <Sidebar />
-            </Col>
-          </Row>
-        </Container>
+        <Routes inputValue={inputValue} />
       </div>
     );
   }

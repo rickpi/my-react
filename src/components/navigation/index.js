@@ -33,15 +33,17 @@ const Navigation = class Navigation extends React.Component {
     return (
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">
-            <Film className="mr-2" />
-            MyMovies
+          <Navbar.Brand>
+            <Nav.Link href="/app">
+              <Film className="mr-2" />
+              MyMovies
+            </Nav.Link>
           </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Action</Nav.Link>
-            <Nav.Link href="#features">Aventure</Nav.Link>
-            <Nav.Link href="#pricing">Horreur</Nav.Link>
-            <Nav.Link href="#pricing">Comédie</Nav.Link>
+            <Nav.Link href="/movies/action">Action</Nav.Link>
+            <Nav.Link href="/movies/aventure">Aventure</Nav.Link>
+            <Nav.Link href="/movies/horreur">Horreur</Nav.Link>
+            <Nav.Link href="/movies/comedie">Comédie</Nav.Link>
             <Nav.Link href="#pricing">Sign-in</Nav.Link>
           </Nav>
           <Form inline>
