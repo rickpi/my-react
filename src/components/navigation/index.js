@@ -18,7 +18,7 @@ const Navigation = () => (
       </Nav.Link>
     </Navbar.Brand>
     <Nav className="mr-auto">
-      <Nav.Link href="/">Application</Nav.Link>
+      <Nav.Link href="/">Evénement</Nav.Link>
       <Nav.Link href="/about">A propos</Nav.Link>
     </Nav>
     <Form inline>
