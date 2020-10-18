@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap';
 
 const Item = ({ tagName }) => (
-  <Button variant="warning" size="sm" className="mr-1">
+  <Button variant="warning" size="sm" className="mr-1 mb-1">
     {tagName}
   </Button>
 );

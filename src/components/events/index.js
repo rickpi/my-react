@@ -5,6 +5,7 @@ import {
   Card,
   Button,
 } from 'react-bootstrap';
+import { Cash, Building } from 'react-bootstrap-icons';
 
 import Filters from '../filters';
 import Tags from '../tags';
@@ -13,7 +14,7 @@ const events = [{
   title: 'ELLE PART DANS DES TRUCS',
   leadText: 'Claire-Marie se raconte, se disperse et s\'égare pour notre plus grand bonheur. Un spectacle qui fait du bien !',
   coverUrl: 'https://cdn.paris.fr/qfap/2020/08/18/72516_VmlzdWVsIHBhcmlzZnIgZWxsZSBwYXJ0IGRhbnMgZGVzIHRydWNzLmpwZw==.jpg',
-  tags: 'Ados;En famille',
+  tags: 'Ados;En famille;C\'est un peu;A chier;On va pas;Se mentir',
   priceType: 'payant',
   addressCity: 'Paris',
   id: '109066',
@@ -53,7 +54,7 @@ const events = [{
   title: 'ELLE PART DANS DES TRUCS',
   leadText: 'Claire-Marie se raconte, se disperse et s\'égare pour notre plus grand bonheur. Un spectacle qui fait du bien !',
   coverUrl: 'https://cdn.paris.fr/qfap/2020/08/18/72516_VmlzdWVsIHBhcmlzZnIgZWxsZSBwYXJ0IGRhbnMgZGVzIHRydWNzLmpwZw==.jpg',
-  tags: 'Ados;En famille',
+  tags: 'Ados;En famille;C\'est un peu;A chier;On va pas;Se mentir',
   priceType: 'payant',
   addressCity: 'Paris',
   id: '109066',
@@ -76,14 +77,24 @@ const EventItem = ({ data }) => {
         <Card.Header as="h5">{title}</Card.Header>
         <Card.Img variant="top" src={coverUrl} />
         <Card.Body>
-          <Card.Subtitle>
-            {leadText}
-            {priceType}
-            {addressCity}
-          </Card.Subtitle>
-          <Card.Text><Tags tags={tags} /></Card.Text>
+          <Card.Subtitle>{leadText}</Card.Subtitle>
+          <Card.Text>
+            <Row>
+              <Col xs="6">
+                <Cash className="mr-2" />
+                {priceType}
+              </Col>
+              <Col xs="6">
+                <Building className="mr-2" />
+                {addressCity}
+              </Col>
+            </Row>
+          </Card.Text>
           <Button variant="outline-light" href={`/event?id=${id}`} size="md">Voir le détail</Button>
         </Card.Body>
+        <Card.Footer>
+          <Card.Text><Tags tags={tags} /></Card.Text>
+        </Card.Footer>
       </Card>
     </Col>
   );
