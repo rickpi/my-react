@@ -18,9 +18,13 @@ const Routes = () => (
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/event/:id">
-            <EventDetails />
-          </Route>
+          <Route
+            path="/event/:id"
+            render={(props) => {
+              const { id } = props.match.params;
+              return <EventDetails id={id} />;
+            }}
+          />
           <Route path="/">
             <Events />
           </Route>

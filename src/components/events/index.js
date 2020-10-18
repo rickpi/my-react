@@ -62,16 +62,16 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=6')
+    axios.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=30')
       .then((res) => {
-        const events = res.data.records.map(({ fields }) => ({
+        const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
           leadText: fields.lead_text,
           coverUrl: fields.cover_url,
           tags: fields.tags,
           priceType: fields.price_type,
           addressCity: fields.address_city,
-          id: fields.id,
+          id: recordid,
         }));
         this.setState({
           events,
