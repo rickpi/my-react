@@ -4,6 +4,7 @@ import {
   Navbar,
   Nav,
   Form,
+  InputGroup,
   FormControl,
   Button,
 } from 'react-bootstrap';
@@ -21,10 +22,12 @@ const Navigation = () => (
       <Nav.Link href="/about">A propos</Nav.Link>
     </Nav>
     <Form inline>
-      <FormControl type="text" placeholder="Rechercher un événement..." className="mr-sm-2" />
-      <Button variant="outline-info">
-        Lancer la recherche
-      </Button>
+      <InputGroup size="sm">
+        <FormControl type="text" placeholder="Rechercher un événement..." className="mr-sm-2" />
+        <InputGroup.Append>
+          <Button variant="outline-secondary">Lancer la recherche</Button>
+        </InputGroup.Append>
+      </InputGroup>
     </Form>
   </Navbar>
 );
