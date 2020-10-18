@@ -42,7 +42,7 @@ const EventItem = ({ data }) => {
               </Col>
             </Row>
           </Card.Text>
-          <Button variant="outline-light" href={`/event?id=${id}`} size="md">Voir le détail</Button>
+          <Button variant="outline-light" href={`/event/${id}`} size="md">Voir le détail</Button>
         </Card.Body>
         <Card.Footer>
           <Card.Text><Tags tags={tags} /></Card.Text>

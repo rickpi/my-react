@@ -8,6 +8,7 @@ import {
 
 import About from '../about';
 import Events from '../events';
+import EventDetails from '../event-details';
 
 const Routes = () => (
   <Container>
@@ -16,6 +17,9 @@ const Routes = () => (
         <Switch>
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/event/:id">
+            <EventDetails />
           </Route>
           <Route path="/">
             <Events />
