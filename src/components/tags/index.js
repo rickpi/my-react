@@ -10,10 +10,15 @@ const Item = ({ tagName }) => (
   </Button>
 );
 
-const Tags = ({ tags }) => (
-  <Row>
-    {tags.split(';').map((tag) => <Item tagName={tag} />)}
-  </Row>
-);
+const Tags = ({ tags }) => {
+  if (tags) {
+    return (
+      <Row>
+        {tags.split(';').map((tag) => <Item tagName={tag} />)}
+      </Row>
+    );
+  }
+  return <Row>{' '}</Row>;
+};
 
 export default Tags;
