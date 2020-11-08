@@ -154,9 +154,7 @@ class Events extends Component {
           </Row>
           <Button className="mb-4" variant="secondary" onClick={this.moreEvents}>{'Voir plus d\'événements'}</Button>
         </Col>
-        <Col xs="3">
-          <Filters />
-        </Col>
+        <Filters />
       </Row>
     );
   }
