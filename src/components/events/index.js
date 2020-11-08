@@ -66,6 +66,7 @@ class Events extends Component {
       events: [],
       isReady: false,
     };
+    this.moreEvents = this.moreEvents.bind(this);
   }
 
   componentDidMount() {
@@ -82,6 +83,32 @@ class Events extends Component {
         }));
         this.setState({
           events,
+          isReady: true,
+        });
+      });
+  }
+
+  moreEvents() {
+    const { events } = this.state;
+    const nbEvents = events.length;
+
+    this.setState({
+      events,
+      isReady: false,
+    });
+    axios.get(`https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=3&start=${nbEvents}`)
+      .then((res) => {
+        const newEvents = res.data.records.map(({ recordid, fields }) => ({
+          title: fields.title,
+          leadText: fields.lead_text,
+          coverUrl: fields.cover_url,
+          tags: fields.tags,
+          priceType: fields.price_type,
+          addressCity: fields.address_city,
+          id: recordid,
+        }));
+        this.setState({
+          events: events.concat(newEvents),
           isReady: true,
         });
       });
@@ -104,7 +131,7 @@ class Events extends Component {
           <Row className="mt-4">
             {displayedComponent}
           </Row>
-          <Button className="mb-4" variant="secondary">{'Voir plus d\'événements'}</Button>
+          <Button className="mb-4" variant="secondary" onClick={this.moreEvents}>{'Voir plus d\'événements'}</Button>
         </Col>
         <Col xs="3">
           <Filters />
