@@ -22,6 +22,15 @@ const EventItem = ({ data }) => {
     tags,
     id,
   } = data;
+  let footer = null;
+
+  if (tags) {
+    footer = (
+      <Card.Footer>
+        <Card.Text><Tags tags={tags} /></Card.Text>
+      </Card.Footer>
+    );
+  }
 
   return (
     <Col xs="4" className="mb-4">
@@ -44,9 +53,7 @@ const EventItem = ({ data }) => {
           </Card.Text>
           <Button variant="outline-light" href={`/event/${id}`} size="md">Voir le détail</Button>
         </Card.Body>
-        <Card.Footer>
-          <Card.Text><Tags tags={tags} /></Card.Text>
-        </Card.Footer>
+        {footer}
       </Card>
     </Col>
   );
@@ -62,7 +69,7 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=30')
+    axios.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=6')
       .then((res) => {
         const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
