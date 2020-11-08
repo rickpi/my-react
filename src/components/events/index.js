@@ -128,6 +128,7 @@ class Events extends Component {
       <Row>
         <Col xs="9">
           <h3 className="mt-4">Que faire à Paris ?</h3>
+          <h4 className="mt-4">{`Résultats : ${events.length}`}</h4>
           <Row className="mt-4">
             {displayedComponent}
           </Row>
