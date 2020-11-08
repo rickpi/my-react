@@ -26,7 +26,7 @@ class App extends Component {
         inputValue={inputValue}
         updateInputValue={this.updateInputValue}
       />,
-      <Routes inputValue={inputValue} />,
+      <Routes query={inputValue} />,
     ];
   }
 }

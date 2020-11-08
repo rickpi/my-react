@@ -10,7 +10,7 @@ import About from '../about';
 import Events from '../events';
 import EventDetails from '../event-details';
 
-const Routes = () => (
+const Routes = ({ query }) => (
   <Container>
     <Row>
       <Col xs="12">
@@ -26,7 +26,7 @@ const Routes = () => (
             }}
           />
           <Route path="/">
-            <Events />
+            <Events query={query} />
           </Route>
         </Switch>
       </Col>

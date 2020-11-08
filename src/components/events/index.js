@@ -83,15 +83,18 @@ class Events extends Component {
       events: [],
       isReady: false,
       tags: [],
+      query: props.query,
     };
     this.moreEvents = this.moreEvents.bind(this);
     this.handleTagsFilter = this.handleTagsFilter.bind(this);
   }
 
   componentDidMount() {
-    const { tags } = this.state;
+    const { tags, query } = this.state;
 
-    axios.get(`${url}&rows=6&${formatTags(tags)}`)
+    console.log('componentDidMount');
+
+    axios.get(`${url}&rows=6&q=${query}&${formatTags(tags)}`)
       .then((res) => {
         const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -106,20 +109,22 @@ class Events extends Component {
           events,
           isReady: true,
           tags,
+          query,
         });
       });
   }
 
   moreEvents() {
-    const { events, tags } = this.state;
+    const { events, tags, query } = this.state;
     const nbEvents = events.length;
 
     this.setState({
       events,
       isReady: false,
       tags,
+      query,
     });
-    axios.get(`${url}&rows=3&start=${nbEvents}&${formatTags(tags)}`)
+    axios.get(`${url}&rows=3&start=${nbEvents}&q=${query}&${formatTags(tags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -134,17 +139,21 @@ class Events extends Component {
           events: events.concat(newEvents),
           isReady: true,
           tags,
+          query,
         });
       });
   }
 
   handleTagsFilter(selectedTags) {
+    const { query } = this.state;
+
     this.setState({
       events: [],
       isReady: false,
       tags: selectedTags,
+      query,
     });
-    axios.get(`${url}&rows=6&${formatTags(selectedTags)}`)
+    axios.get(`${url}&rows=6&q=${query}&${formatTags(selectedTags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -159,6 +168,7 @@ class Events extends Component {
           events: newEvents,
           isReady: true,
           tags: selectedTags,
+          query,
         });
       });
   }
