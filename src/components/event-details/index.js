@@ -17,6 +17,8 @@ import axios from 'axios';
 
 import Tags from '../tags';
 
+import url from '../../constants/url';
+
 class EventDetails extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,7 @@ class EventDetails extends Component {
 
   componentDidMount() {
     const { id } = this.state;
-    axios.get(`https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&refine.recordid=${id}`)
+    axios.get(`${url}&refine.recordid=${id}`)
       .then((res) => {
         const { records } = res.data;
         const { fields } = records[0];

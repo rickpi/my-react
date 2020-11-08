@@ -12,6 +12,8 @@ import axios from 'axios';
 import Filters from '../filters';
 import Tags from '../tags';
 
+import url from '../../constants/url';
+
 const EventItem = ({ data }) => {
   const {
     title,
@@ -70,7 +72,7 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=6')
+    axios.get(`${url}&rows=6`)
       .then((res) => {
         const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -96,7 +98,7 @@ class Events extends Component {
       events,
       isReady: false,
     });
-    axios.get(`https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&rows=3&start=${nbEvents}`)
+    axios.get(`${url}&rows=3&start=${nbEvents}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
