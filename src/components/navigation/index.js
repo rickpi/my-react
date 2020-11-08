@@ -15,6 +15,15 @@ class Navigation extends Component {
     this.state = {
       inputValue: props.inputValue,
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(typed) {
+    let { inputValue } = this.state;
+    inputValue = typed;
+    this.setState({
+      inputValue,
+    });
   }
 
   render() {
@@ -34,7 +43,15 @@ class Navigation extends Component {
         </Nav>
         <Form inline>
           <InputGroup size="sm">
-            <FormControl type="text" placeholder="Rechercher un événement..." className="mr-sm-2" value={inputValue} />
+            <FormControl
+              type="text"
+              placeholder="Rechercher un événement..."
+              className="mr-sm-2"
+              value={inputValue}
+              onChange={(event) => {
+                this.handleChange(event.target.value);
+              }}
+            />
             <InputGroup.Append>
               <Button variant="outline-secondary">Lancer la recherche</Button>
             </InputGroup.Append>
