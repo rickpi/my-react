@@ -4,17 +4,17 @@ import {
   Button,
 } from 'react-bootstrap';
 
-const Item = ({ tagName }) => (
-  <Button variant="warning" size="sm" className="mr-1 mb-1">
+const Item = ({ tagName, click }) => (
+  <Button variant="warning" size="sm" className="mr-1 mb-1" onClick={() => click(tagName)}>
     {tagName}
   </Button>
 );
 
-const LinkedTags = ({ tags }) => {
+const LinkedTags = ({ tags, clickOnTag }) => {
   if (tags) {
     return (
       <Row>
-        {tags.split(';').map((tag) => <Item tagName={tag} />)}
+        {tags.split(';').map((tag) => <Item tagName={tag} click={clickOnTag} />)}
       </Row>
     );
   }
