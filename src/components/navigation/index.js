@@ -28,6 +28,7 @@ class Navigation extends Component {
 
   render() {
     const { inputValue } = this.state;
+    const { updateInputValue } = this.props;
 
     return (
       <Navbar bg="dark" variant="dark">
@@ -53,7 +54,12 @@ class Navigation extends Component {
               }}
             />
             <InputGroup.Append>
-              <Button variant="outline-secondary">Lancer la recherche</Button>
+              <Button
+                variant="outline-secondary"
+                onClick={() => updateInputValue(inputValue)}
+              >
+                Lancer la recherche
+              </Button>
             </InputGroup.Append>
           </InputGroup>
         </Form>

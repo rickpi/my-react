@@ -9,14 +9,24 @@ class App extends Component {
     this.state = {
       inputValue: '',
     };
+    this.updateInputValue = this.updateInputValue.bind(this);
+  }
+
+  updateInputValue(typed) {
+    this.setState({
+      inputValue: typed,
+    });
   }
 
   render() {
     const { inputValue } = this.state;
 
     return [
-      <Navigation inputValue={inputValue} />,
-      <Routes />,
+      <Navigation
+        inputValue={inputValue}
+        updateInputValue={this.updateInputValue}
+      />,
+      <Routes inputValue={inputValue} />,
     ];
   }
 }
