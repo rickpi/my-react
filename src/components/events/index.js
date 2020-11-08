@@ -67,12 +67,14 @@ class Events extends Component {
     this.state = {
       events: [],
       isReady: false,
+      tags: [],
     };
     this.moreEvents = this.moreEvents.bind(this);
+    this.formatTags = this.formatTags.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`${url}&rows=6`)
+    axios.get(`${url}&rows=6&${this.formatTags()}`)
       .then((res) => {
         const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -98,7 +100,7 @@ class Events extends Component {
       events,
       isReady: false,
     });
-    axios.get(`${url}&rows=3&start=${nbEvents}`)
+    axios.get(`${url}&rows=3&start=${nbEvents}&${this.formatTags()}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -114,6 +116,22 @@ class Events extends Component {
           isReady: true,
         });
       });
+  }
+
+  formatTags() {
+    const { tags } = this.state;
+    let formattedTags = '';
+
+    if (tags.length === 0) return null;
+
+    if (tags.length === 1) return `refine.tags=${encodeURI(tags[0])}`;
+
+    for (let i = 0; i < tags.length; i += 1) {
+      formattedTags += `refine.tags=${encodeURI(tags[i])}`;
+      if ((i + 1) !== tags.length) formattedTags += '&';
+    }
+
+    return formattedTags;
   }
 
   render() {
