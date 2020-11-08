@@ -20,6 +20,7 @@ class Filters extends Component {
 
   handleClickOnTag(tagName) {
     const { tags, tagsSelected } = this.state;
+    const { tagsFilter } = this.props;
     const index = tags.indexOf(tagName);
 
     tags.splice(index, 1);
@@ -28,10 +29,12 @@ class Filters extends Component {
       tags,
       tagsSelected,
     });
+    tagsFilter(tagsSelected);
   }
 
   handleClickOnSelectedTag(tagName) {
     const { tags, tagsSelected } = this.state;
+    const { tagsFilter } = this.props;
     const index = tagsSelected.indexOf(tagName);
 
     tagsSelected.splice(index, 1);
@@ -40,6 +43,7 @@ class Filters extends Component {
       tags,
       tagsSelected,
     });
+    tagsFilter(tagsSelected);
   }
 
   render() {

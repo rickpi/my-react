@@ -61,6 +61,21 @@ const EventItem = ({ data }) => {
   );
 };
 
+const formatTags = (tags) => {
+  let formattedTags = '';
+
+  if (tags.length === 0) return null;
+
+  if (tags.length === 1) return `refine.tags=${encodeURI(tags[0])}`;
+
+  for (let i = 0; i < tags.length; i += 1) {
+    formattedTags += `refine.tags=${encodeURI(tags[i])}`;
+    if ((i + 1) !== tags.length) formattedTags += '&';
+  }
+
+  return formattedTags;
+};
+
 class Events extends Component {
   constructor(props) {
     super(props);
@@ -70,11 +85,13 @@ class Events extends Component {
       tags: [],
     };
     this.moreEvents = this.moreEvents.bind(this);
-    this.formatTags = this.formatTags.bind(this);
+    this.handleTagsFilter = this.handleTagsFilter.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`${url}&rows=6&${this.formatTags()}`)
+    const { tags } = this.state;
+
+    axios.get(`${url}&rows=6&${formatTags(tags)}`)
       .then((res) => {
         const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -88,19 +105,21 @@ class Events extends Component {
         this.setState({
           events,
           isReady: true,
+          tags,
         });
       });
   }
 
   moreEvents() {
-    const { events } = this.state;
+    const { events, tags } = this.state;
     const nbEvents = events.length;
 
     this.setState({
       events,
       isReady: false,
+      tags,
     });
-    axios.get(`${url}&rows=3&start=${nbEvents}&${this.formatTags()}`)
+    axios.get(`${url}&rows=3&start=${nbEvents}&${formatTags(tags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -114,24 +133,34 @@ class Events extends Component {
         this.setState({
           events: events.concat(newEvents),
           isReady: true,
+          tags,
         });
       });
   }
 
-  formatTags() {
-    const { tags } = this.state;
-    let formattedTags = '';
-
-    if (tags.length === 0) return null;
-
-    if (tags.length === 1) return `refine.tags=${encodeURI(tags[0])}`;
-
-    for (let i = 0; i < tags.length; i += 1) {
-      formattedTags += `refine.tags=${encodeURI(tags[i])}`;
-      if ((i + 1) !== tags.length) formattedTags += '&';
-    }
-
-    return formattedTags;
+  handleTagsFilter(selectedTags) {
+    this.setState({
+      events: [],
+      isReady: false,
+      tags: selectedTags,
+    });
+    axios.get(`${url}&rows=6&${formatTags(selectedTags)}`)
+      .then((res) => {
+        const newEvents = res.data.records.map(({ recordid, fields }) => ({
+          title: fields.title,
+          leadText: fields.lead_text,
+          coverUrl: fields.cover_url,
+          tags: fields.tags,
+          priceType: fields.price_type,
+          addressCity: fields.address_city,
+          id: recordid,
+        }));
+        this.setState({
+          events: newEvents,
+          isReady: true,
+          tags: selectedTags,
+        });
+      });
   }
 
   render() {
@@ -154,7 +183,7 @@ class Events extends Component {
           </Row>
           <Button className="mb-4" variant="secondary" onClick={this.moreEvents}>{'Voir plus d\'événements'}</Button>
         </Col>
-        <Filters />
+        <Filters tagsFilter={this.handleTagsFilter} />
       </Row>
     );
   }
