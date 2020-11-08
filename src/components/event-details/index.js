@@ -30,9 +30,10 @@ class EventDetails extends Component {
 
   componentDidMount() {
     const { id } = this.state;
-    axios.get(`https://opendata.paris.fr/api/datasets/1.0/que-faire-a-paris-/records/${id}`)
+    axios.get(`https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&refine.recordid=${id}`)
       .then((res) => {
-        const { fields } = res.data;
+        const { records } = res.data;
+        const { fields } = records[0];
         const event = {
           contact: {
             name: fields.contact_name,
