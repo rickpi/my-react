@@ -8,6 +8,7 @@ import {
   FormControl,
   Button,
 } from 'react-bootstrap';
+import './navigation.css';
 
 class Navigation extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Navigation extends Component {
       inputValue: props.inputValue,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.emptyInput = this.emptyInput.bind(this);
   }
 
   handleChange(typed) {
@@ -26,9 +28,27 @@ class Navigation extends Component {
     });
   }
 
+  emptyInput() {
+    const { updateInputValue } = this.props;
+
+    updateInputValue('');
+    this.setState({
+      inputValue: '',
+    });
+  }
+
   render() {
     const { inputValue } = this.state;
     const { updateInputValue } = this.props;
+    let emptyButton = null;
+
+    if (inputValue !== '') {
+      emptyButton = (
+        <button type="button" onClick={this.emptyInput} className="empty-input-button">
+          X
+        </button>
+      );
+    }
 
     return (
       <Navbar bg="dark" variant="dark">
@@ -44,6 +64,7 @@ class Navigation extends Component {
         </Nav>
         <Form inline onSubmit={(e) => { e.preventDefault(); }}>
           <InputGroup size="sm">
+            {emptyButton}
             <FormControl
               type="text"
               placeholder="Rechercher un événement..."
