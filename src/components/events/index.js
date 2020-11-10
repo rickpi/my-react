@@ -87,12 +87,11 @@ class Events extends Component {
     };
     this.moreEvents = this.moreEvents.bind(this);
     this.handleTagsFilter = this.handleTagsFilter.bind(this);
+    this.queryReceived = this.queryReceived.bind(this);
   }
 
   componentDidMount() {
     const { tags, query } = this.state;
-
-    console.log('componentDidMount');
 
     axios.get(`${url}&rows=6&q=${query}&${formatTags(tags)}`)
       .then((res) => {
@@ -153,7 +152,7 @@ class Events extends Component {
       tags: selectedTags,
       query,
     });
-    axios.get(`${url}&rows=6&q=${query}&${formatTags(selectedTags)}`)
+    axios.get(`${url}&rows=6&q=${encodeURI(query)}&${formatTags(selectedTags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -173,21 +172,54 @@ class Events extends Component {
       });
   }
 
+  queryReceived() {
+    const { tags } = this.state;
+    const { query } = this.props;
+
+    this.setState({
+      events: [],
+      isReady: false,
+      tags,
+      query,
+    });
+    axios.get(`${url}&rows=6&q=${encodeURI(query)}&${formatTags(tags)}`)
+      .then((res) => {
+        const newEvents = res.data.records.map(({ recordid, fields }) => ({
+          title: fields.title,
+          leadText: fields.lead_text,
+          coverUrl: fields.cover_url,
+          tags: fields.tags,
+          priceType: fields.price_type,
+          addressCity: fields.address_city,
+          id: recordid,
+        }));
+        this.setState({
+          events: newEvents,
+          isReady: true,
+          tags,
+          query,
+        });
+      });
+  }
+
   render() {
-    const { events, isReady } = this.state;
+    const { events, isReady, query } = this.state;
+    const { query: propsQuery } = this.props;
+    let queryString = '';
     let displayedComponent;
 
-    if (isReady) {
-      displayedComponent = events.map((event) => <EventItem data={event} />);
-    } else {
-      displayedComponent = <Spinner className="ml-4 mb-4" animation="border" />;
-    }
+    if (isReady) displayedComponent = events.map((event) => <EventItem data={event} />);
+    else displayedComponent = <Spinner className="ml-4 mb-4" animation="border" />;
+
+    if (propsQuery !== query) this.queryReceived();
+
+    if (query !== '') queryString = `pour '${query}' `;
 
     return (
       <Row>
         <Col xs="9">
           <h3 className="mt-4">Que faire à Paris ?</h3>
-          <h4 className="mt-4">{`Résultats : ${events.length}`}</h4>
+          <h4 className="mt-4">{`Résultats ${queryString}: ${events.length}`}</h4>
           <Row className="mt-4">
             {displayedComponent}
           </Row>
