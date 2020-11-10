@@ -42,7 +42,7 @@ class Navigation extends Component {
           <Nav.Link href="/">Evénement</Nav.Link>
           <Nav.Link href="/about">A propos</Nav.Link>
         </Nav>
-        <Form inline>
+        <Form inline onSubmit={(e) => { e.preventDefault(); }}>
           <InputGroup size="sm">
             <FormControl
               type="text"
@@ -51,6 +51,9 @@ class Navigation extends Component {
               value={inputValue}
               onChange={(event) => {
                 this.handleChange(event.target.value);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') updateInputValue(inputValue);
               }}
             />
             <InputGroup.Append>
