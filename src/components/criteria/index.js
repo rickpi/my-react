@@ -62,6 +62,7 @@ class Criteria extends Component {
       category,
       date,
     } = this.state;
+    const { search } = this.props;
     const selected = category === '' ? 'noCategory' : category;
     let emptyDateButton = null;
 
@@ -76,8 +77,6 @@ class Criteria extends Component {
         </Button>
       );
     }
-
-    console.log(this.state);
 
     return (
       <Col xs="3">
@@ -146,7 +145,13 @@ class Criteria extends Component {
               }}
             />
           </Form.Group>
-          <Button variant="secondary" type="button">
+          <Button
+            variant="secondary"
+            type="button"
+            onClick={() => {
+              search(this.state);
+            }}
+          >
             Lancer la recherche avec ces critères
           </Button>
         </Form>
