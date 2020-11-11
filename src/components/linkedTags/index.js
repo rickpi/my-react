@@ -14,7 +14,7 @@ const LinkedTags = ({ tags, clickOnTag }) => {
   if (tags) {
     return (
       <Row>
-        {tags.split(';').map((tag) => <Item tagName={tag} click={clickOnTag} />)}
+        {tags.split(';').map((tag) => <Item tagName={tag} click={clickOnTag} key={tag} />)}
       </Row>
     );
   }

@@ -14,7 +14,7 @@ const Tags = ({ tags }) => {
   if (tags) {
     return (
       <Row>
-        {tags.split(';').map((tag) => <Item tagName={tag} />)}
+        {tags.split(';').map((tag) => <Item tagName={tag} key={tag} />)}
       </Row>
     );
   }
