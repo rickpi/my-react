@@ -76,7 +76,7 @@ const formatTags = (tags) => {
   return formattedTags;
 };
 
-class Events extends Component {
+class ToDoInParis extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -231,4 +231,4 @@ class Events extends Component {
   }
 }
 
-export default Events;
+export default ToDoInParis;

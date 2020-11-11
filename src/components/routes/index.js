@@ -8,7 +8,7 @@ import {
 
 import About from '../about';
 import Advanced from '../advanced';
-import Events from '../events';
+import ToDoInParis from '../to-do-in-paris';
 import EventDetails from '../event-details';
 
 const Routes = ({ query }) => (
@@ -30,7 +30,7 @@ const Routes = ({ query }) => (
             <Advanced />
           </Route>
           <Route path="/">
-            <Events query={query} />
+            <ToDoInParis query={query} />
           </Route>
         </Switch>
       </Col>
