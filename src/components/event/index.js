@@ -24,7 +24,7 @@ const Event = ({ data }) => {
   if (tags) {
     footer = (
       <Card.Footer>
-        <Card.Text><Tags tags={tags} /></Card.Text>
+        <Card.Text as="div"><Tags tags={tags} /></Card.Text>
       </Card.Footer>
     );
   }
@@ -36,7 +36,7 @@ const Event = ({ data }) => {
         <Card.Img variant="top" src={coverUrl} />
         <Card.Body>
           <Card.Subtitle>{leadText}</Card.Subtitle>
-          <Card.Text>
+          <Card.Text as="div">
             <Row>
               <Col xs="6">
                 <Cash className="mr-2" />
