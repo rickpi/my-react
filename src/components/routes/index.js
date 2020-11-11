@@ -7,6 +7,7 @@ import {
 } from 'react-bootstrap';
 
 import About from '../about';
+import Advanced from '../advanced';
 import Events from '../events';
 import EventDetails from '../event-details';
 
@@ -25,6 +26,9 @@ const Routes = ({ query }) => (
               return <EventDetails id={id} />;
             }}
           />
+          <Route path="/advanced">
+            <Advanced />
+          </Route>
           <Route path="/">
             <Events query={query} />
           </Route>

@@ -60,6 +60,7 @@ class Navigation extends Component {
         </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/">Evénement</Nav.Link>
+          <Nav.Link href="/advanced">Recherche avancée</Nav.Link>
           <Nav.Link href="/about">A propos</Nav.Link>
         </Nav>
         <Form inline onSubmit={(e) => { e.preventDefault(); }}>
