@@ -4,6 +4,8 @@ import {
   Col,
 } from 'react-bootstrap';
 
+import Criteria from '../criteria';
+
 class Advanced extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,7 @@ class Advanced extends Component {
           <h3 className="mt-4">Recherche avancée</h3>
           <Row className="mt-4">{isReady}</Row>
         </Col>
+        <Criteria />
       </Row>
     );
   }
