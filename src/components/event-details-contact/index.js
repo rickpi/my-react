@@ -14,6 +14,16 @@ const ExportButton = ({ variant, href, value }) => (
 );
 
 const EventDetailsContact = ({ contact }) => {
+  let mail = null;
+
+  if (contact.mail) {
+    mail = (
+      <Col xs="12" className="mb-3">
+        <Envelope className="mr-2" />
+        {Parser(`<strong>${contact.mail}</strong>`)}
+      </Col>
+    );
+  }
   const facebook = contact.facebook
     ? <ExportButton variant="info" href={contact.facebook} value="FACEBOOK" />
     : null;
@@ -28,10 +38,7 @@ const EventDetailsContact = ({ contact }) => {
     <Row>
       <h5 className="mb-3 mt-4 ml-2">Contact</h5>
       <Col xs="12">{contact.name}</Col>
-      <Col xs="12" className="mb-3">
-        <Envelope className="mr-2" />
-        {Parser(`<strong>${contact.mail}</strong>`)}
-      </Col>
+      {mail}
       <Col xs="12" className="mb-2">
         <Row>
           {facebook}
