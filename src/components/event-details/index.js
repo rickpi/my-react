@@ -11,12 +11,12 @@ import {
 } from 'react-bootstrap-icons';
 import axios from 'axios';
 
+import EventDetailsLocation from '../event-details-location';
 import EventDetailsContact from '../event-details-contact';
 import Tags from '../tags';
 import './event-details.css';
 
 import url from '../../constants/url';
-import API_KEY from '../../constants/API_KEY';
 
 class EventDetails extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class EventDetails extends Component {
       return <Spinner className="ml-4 mt-4" animation="border" />;
     }
 
-    const { address, about } = event;
+    const { about } = event;
 
     return (
       <Row className="event-detail__container">
@@ -98,7 +98,7 @@ class EventDetails extends Component {
         </Col>
         <Col xs="1">{' '}</Col>
         <Col xs="4">
-          <Col className="event-detail__right-block" xs="12">
+          <Col className="event-detail__right-block px-4 py-3" xs="12">
             <h5 className="mb-3">A propos</h5>
             <Col xs="12" className="mb-3 event-detail__price">
               <Cash className="mr-3" />
@@ -110,31 +110,9 @@ class EventDetails extends Component {
                 {Parser(about.date)}
               </div>
             </Col>
-            <h5 className="mb-3 mt-4">Localisation</h5>
-            <Col xs="12" className="mb-3">
-              {Parser(`\
-                ${address.name}\
-                <br/>\
-                <strong>${address.city}</strong>\
-                <br/>\
-                ${address.zipcode}, ${address.street}\
-              `)}
-            </Col>
-            <Col className="event-detail__map mb-3" xs="12">
-              <iframe
-                frameBorder="0"
-                src={`https://www.google.com/maps/embed/v1/place?\
-                  key=${API_KEY}&\
-                  q=${encodeURI(`${address.street},${address.city} France`)}\
-                `.replace(/ /g, '')}
-                title="location"
-                allowFullScreen
-              />
-            </Col>
+            <EventDetailsLocation address={event.address} />
             <EventDetailsContact contact={event.contact} />
-            <Col xs="12">
-              <Tags tags={about.tags} />
-            </Col>
+            <Tags tags={about.tags} />
           </Col>
         </Col>
       </Row>

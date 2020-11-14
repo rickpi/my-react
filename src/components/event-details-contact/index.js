@@ -14,7 +14,6 @@ const ExportButton = ({ variant, href, value }) => (
 );
 
 const EventDetailsContact = ({ contact }) => {
-  console.log(contact);
   const facebook = contact.facebook
     ? <ExportButton variant="info" href={contact.facebook} value="FACEBOOK" />
     : null;
@@ -26,8 +25,8 @@ const EventDetailsContact = ({ contact }) => {
     : null;
 
   return (
-    <Row className="pl-3">
-      <h5 className="mb-3 mt-4">Contact</h5>
+    <Row>
+      <h5 className="mb-3 mt-4 ml-2">Contact</h5>
       <Col xs="12">{contact.name}</Col>
       <Col xs="12" className="mb-3">
         <Envelope className="mr-2" />
