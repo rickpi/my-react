@@ -84,3 +84,20 @@
   height: 40vh;
   border: 0;
 }
+
+.event-detail__access {
+  list-style: none;
+}
+
+.event-detail__access__item {
+  display: flex;
+  align-items: center;
+}
+
+.event-detail__access__item span {
+  width: .75rem;
+  height: .75rem;
+  border-radius: 100%;
+  background-color: #DA9224;
+  margin-right: 1rem;
+}
