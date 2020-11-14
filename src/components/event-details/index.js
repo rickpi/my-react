@@ -8,6 +8,7 @@ import Parser from 'html-react-parser';
 import axios from 'axios';
 
 import './event-details.css';
+import EventDetailsHead from '../event-details-head';
 import EventDetailsAbout from '../event-details-about';
 import EventDetailsLocation from '../event-details-location';
 import EventDetailsContact from '../event-details-contact';
@@ -77,15 +78,7 @@ class EventDetails extends Component {
 
     return (
       <Row className="event-detail__container">
-        <Col
-          xs="12"
-          className="event-detail__head"
-          style={{
-            backgroundImage: `url('${event.cover}')`,
-          }}
-        >
-          <h3 className="event-detail__title">{event.title}</h3>
-        </Col>
+        <EventDetailsHead title={event.title} cover={event.cover} />
         <Col xs="7" className="mt-4">
           <h5 className="mb-4">{event.leadText}</h5>
           {Parser(event.description)}
