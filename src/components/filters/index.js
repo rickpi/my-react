@@ -5,13 +5,13 @@ import {
 
 import LinkedTags from '../linkedTags';
 
-import tagsList from '../../constants/tagsList';
+import TAGS_LIST from '../../constants/TAGS_LIST';
 
 class Filters extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: tagsList,
+      tags: TAGS_LIST,
       tagsSelected: [],
     };
     this.handleClickOnTag = this.handleClickOnTag.bind(this);

@@ -10,7 +10,7 @@ import axios from 'axios';
 import Filters from '../filters';
 import Event from '../event';
 
-import url from '../../constants/url';
+import BASE_URL from '../../constants/BASE_URL';
 
 const formatTags = (tags) => {
   let formattedTags = '';
@@ -44,7 +44,7 @@ class ToDoInParis extends Component {
   componentDidMount() {
     const { tags, query } = this.state;
 
-    axios.get(`${url}&rows=6&q=${query}&${formatTags(tags)}`)
+    axios.get(`${BASE_URL}&rows=6&q=${query}&${formatTags(tags)}`)
       .then((res) => {
         const events = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -74,7 +74,7 @@ class ToDoInParis extends Component {
       tags,
       query,
     });
-    axios.get(`${url}&rows=3&start=${nbEvents}&q=${query}&${formatTags(tags)}`)
+    axios.get(`${BASE_URL}&rows=3&start=${nbEvents}&q=${query}&${formatTags(tags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -103,7 +103,7 @@ class ToDoInParis extends Component {
       tags: selectedTags,
       query,
     });
-    axios.get(`${url}&rows=6&q=${encodeURI(query)}&${formatTags(selectedTags)}`)
+    axios.get(`${BASE_URL}&rows=6&q=${encodeURI(query)}&${formatTags(selectedTags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,
@@ -133,7 +133,7 @@ class ToDoInParis extends Component {
       tags,
       query,
     });
-    axios.get(`${url}&rows=6&q=${encodeURI(query)}&${formatTags(tags)}`)
+    axios.get(`${BASE_URL}&rows=6&q=${encodeURI(query)}&${formatTags(tags)}`)
       .then((res) => {
         const newEvents = res.data.records.map(({ recordid, fields }) => ({
           title: fields.title,

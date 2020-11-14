@@ -8,7 +8,8 @@ import axios from 'axios';
 
 import Criteria from '../criteria';
 import Event from '../event';
-import url from '../../constants/url';
+
+import URL from '../../constants/BASE_URL';
 
 const formatPrice = (free) => (free ? '&refine.price_type=gratuit' : '');
 
@@ -45,7 +46,7 @@ class Advanced extends Component {
       category,
     } = criteria;
     const query = `\
-      ${url}\
+      ${URL}\
       &rows=${rows}\
       &q=${date}\
       ${formatAccess({ pmr })}\

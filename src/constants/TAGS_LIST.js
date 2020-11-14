@@ -1,4 +1,4 @@
-const tagsList = [
+const TAGS = [
   'Ados',
   'Bibliothèques',
   'Cinéma',
@@ -21,4 +21,4 @@ const tagsList = [
   'Végétalisons Paris',
 ];
 
-export default tagsList;
+export default TAGS;

@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import { XCircle } from 'react-bootstrap-icons';
 
-import categoriesList from '../../constants/categoriesList';
+import CATEGORIES_LIST from '../../constants/CATEGORIES_LIST';
 
 class Criteria extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class Criteria extends Component {
   }
 
   handleCategoryChange(category) {
-    if (categoriesList.indexOf(category) === -1) {
+    if (CATEGORIES_LIST.indexOf(category) === -1) {
       return this.setState({
         category: '',
       });
@@ -117,7 +117,7 @@ class Criteria extends Component {
               onChange={(event) => this.handleCategoryChange(event.target.value)}
             >
               <option value="noCategory">-- Pas de catégorie --</option>
-              {categoriesList.map((item) => (
+              {CATEGORIES_LIST.map((item) => (
                 <option key={item} value={item}>
                   {item}
                 </option>

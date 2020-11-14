@@ -1,4 +1,4 @@
-const categoriesList = [
+const CATEGORIES = [
   'Animations ',
   'Concerts ',
   'Événements ',
@@ -6,4 +6,4 @@ const categoriesList = [
   'Spectacles ',
 ];
 
-export default categoriesList;
+export default CATEGORIES;
