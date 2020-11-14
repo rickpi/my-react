@@ -2,28 +2,21 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Button,
   Spinner,
 } from 'react-bootstrap';
 import Parser from 'html-react-parser';
 import {
   Cash,
   CalendarDate,
-  Envelope,
 } from 'react-bootstrap-icons';
 import axios from 'axios';
 
+import EventDetailsContact from '../event-details-contact';
 import Tags from '../tags';
 import './event-details.css';
 
 import url from '../../constants/url';
 import API_KEY from '../../constants/API_KEY';
-
-const ExportButton = ({ variant, href, value }) => (
-  <Button size="sm" variant={variant} href={href} className="mr-1">
-    {value}
-  </Button>
-);
 
 class EventDetails extends Component {
   constructor(props) {
@@ -66,6 +59,9 @@ class EventDetails extends Component {
             price: fields.price_type,
             url: fields.url,
             date: fields.date_description,
+            pmr: fields.pmr,
+            deaf: fields.deaf,
+            blind: fields.blind,
           },
         };
         this.setState({
@@ -83,7 +79,7 @@ class EventDetails extends Component {
       return <Spinner className="ml-4 mt-4" animation="border" />;
     }
 
-    const { contact, address, about } = event;
+    const { address, about } = event;
 
     return (
       <Row className="event-detail__container">
@@ -98,7 +94,7 @@ class EventDetails extends Component {
         </Col>
         <Col xs="7" className="mt-4">
           <h5 className="mb-4">{about.leadText}</h5>
-          <p>{Parser(about.description)}</p>
+          {Parser(about.description)}
         </Col>
         <Col xs="1">{' '}</Col>
         <Col xs="4">
@@ -124,33 +120,21 @@ class EventDetails extends Component {
                 ${address.zipcode}, ${address.street}\
               `)}
             </Col>
-            <h5 className="mb-3 mt-4">Contact</h5>
-            <Col xs="12">{contact.name}</Col>
-            <Col xs="12" className="mb-3">
-              <Envelope className="mr-2" />
-              {Parser(`<strong>${contact.mail}</strong>`)}
+            <Col className="event-detail__map mb-3" xs="12">
+              <iframe
+                frameBorder="0"
+                src={`https://www.google.com/maps/embed/v1/place?\
+                  key=${API_KEY}&\
+                  q=${encodeURI(`${address.street},${address.city} France`)}\
+                `.replace(/ /g, '')}
+                title="location"
+                allowFullScreen
+              />
             </Col>
-            <Col xs="12" className="mb-2">
-              <Row>
-                <ExportButton variant="primary" href={contact.facebook} value="FACEBOOK" />
-                <ExportButton variant="info" href={contact.twitter} value="TWITTER" />
-                <ExportButton variant="secondary" href={contact.url} value="SITE" />
-              </Row>
-            </Col>
+            <EventDetailsContact contact={event.contact} />
             <Col xs="12">
               <Tags tags={about.tags} />
             </Col>
-          </Col>
-          <Col className="event-detail__map" xs="12">
-            <iframe
-              frameBorder="0"
-              src={`https://www.google.com/maps/embed/v1/place?\
-                key=${API_KEY}&\
-                q=${encodeURI(`${address.street},${address.city} France`)}\
-              `.replace(/ /g, '')}
-              title="location"
-              allowFullScreen
-            />
           </Col>
         </Col>
       </Row>
