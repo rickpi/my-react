@@ -45,6 +45,7 @@
   position: relative;
   z-index: 50;
   height: max-content;
+  border-radius: .25rem;
 }
 
 .event-detail__price {
@@ -77,8 +78,6 @@
 }
 
 .event-detail__map {
-  margin-top: 10vh;
-  margin-left: -3vw;
   padding: 0;
 }
 
