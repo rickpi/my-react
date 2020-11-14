@@ -55,8 +55,6 @@ class Advanced extends Component {
       ${formatCategory(category)}`
       .replace(/ /g, '');
 
-    console.log(query);
-
     this.setState({
       isSearching: true,
       isReady: false,
