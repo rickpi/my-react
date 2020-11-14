@@ -1,9 +1,9 @@
 const categoriesList = [
-  'Animations',
-  'Concerts',
-  'Événements',
-  'Expositions',
-  'Spectacles',
+  'Animations ',
+  'Concerts ',
+  'Événements ',
+  'Expositions ',
+  'Spectacles ',
 ];
 
 export default categoriesList;
