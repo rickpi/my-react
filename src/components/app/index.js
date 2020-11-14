@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Navigation from '../navigation';
 import Routes from '../routes';
 
+import './app.css';
+
 class App extends Component {
   constructor(props) {
     super(props);
