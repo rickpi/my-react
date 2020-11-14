@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Globe2 } from 'react-bootstrap-icons';
+import { Globe2, Search } from 'react-bootstrap-icons';
 import {
   Navbar,
   Nav,
@@ -80,10 +80,10 @@ class Navigation extends Component {
             />
             <InputGroup.Append>
               <Button
-                variant="outline-secondary"
+                variant="secondary"
                 onClick={() => updateInputValue(inputValue)}
               >
-                Lancer la recherche
+                <Search />
               </Button>
             </InputGroup.Append>
           </InputGroup>

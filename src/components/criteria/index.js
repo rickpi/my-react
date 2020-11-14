@@ -5,6 +5,7 @@ import {
   Button,
   Row,
 } from 'react-bootstrap';
+import { XCircle } from 'react-bootstrap-icons';
 
 import categoriesList from '../../constants/categoriesList';
 
@@ -84,14 +85,14 @@ class Criteria extends Component {
           type="button"
           onClick={this.emptyDate}
         >
-          X
+          <XCircle />
         </Button>
       );
     }
 
     return (
       <Col xs="3">
-        <h4 className="mt-4">Critères de recherche</h4>
+        <h5 className="mt-4">Critères de recherche</h5>
         <Form className="mt-4">
           <Form.Group as={Row} controlId="date">
             <Col xs="12">
@@ -180,7 +181,7 @@ class Criteria extends Component {
               search(this.state);
             }}
           >
-            Lancer la recherche avec ces critères
+            Rechercher
           </Button>
         </Form>
       </Col>
