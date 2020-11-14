@@ -8,16 +8,17 @@ import {
 import { Cash, Building } from 'react-bootstrap-icons';
 
 import Tags from '../tags';
+import './event.css';
 
 const Event = ({ data }) => {
   const {
     title,
-    coverUrl,
     leadText,
     priceType,
     addressCity,
     tags,
     id,
+    coverUrl,
   } = data;
   let footer = null;
 
@@ -33,22 +34,30 @@ const Event = ({ data }) => {
     <Col xs="4" className="mb-4">
       <Card text="white" bg="dark">
         <Card.Header as="h5">{title}</Card.Header>
-        <Card.Img variant="top" src={coverUrl} />
+        <div className="event__cover">
+          <img src={coverUrl} alt="" />
+        </div>
         <Card.Body>
-          <Card.Subtitle>{leadText}</Card.Subtitle>
-          <Card.Text as="div">
+          <Card.Subtitle className="mb-3">{leadText}</Card.Subtitle>
+          <Card.Text as="div" className="mb-3">
             <Row>
-              <Col xs="6">
+              <Col xs="5">
                 <Cash className="mr-2" />
                 {priceType}
               </Col>
-              <Col xs="6">
+              <Col xs="7">
                 <Building className="mr-2" />
                 {addressCity}
               </Col>
             </Row>
           </Card.Text>
-          <Button variant="outline-light" href={`/event/${id}`} size="md">Voir en détails</Button>
+          <Button
+            variant="outline-light"
+            href={`/event/${id}`}
+            size="md"
+          >
+            Voir en détails
+          </Button>
         </Card.Body>
         {footer}
       </Card>
