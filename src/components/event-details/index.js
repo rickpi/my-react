@@ -5,16 +5,13 @@ import {
   Spinner,
 } from 'react-bootstrap';
 import Parser from 'html-react-parser';
-import {
-  Cash,
-  CalendarDate,
-} from 'react-bootstrap-icons';
 import axios from 'axios';
 
+import './event-details.css';
+import EventDetailsAbout from '../event-details-about';
 import EventDetailsLocation from '../event-details-location';
 import EventDetailsContact from '../event-details-contact';
 import Tags from '../tags';
-import './event-details.css';
 
 import url from '../../constants/url';
 
@@ -36,6 +33,11 @@ class EventDetails extends Component {
         const { records } = res.data;
         const { fields } = records[0];
         const event = {
+          description: fields.description,
+          title: fields.title,
+          tags: fields.tags,
+          leadText: fields.lead_text,
+          cover: fields.cover_url,
           contact: {
             name: fields.contact_name,
             link: fields.contact_url,
@@ -51,23 +53,17 @@ class EventDetails extends Component {
             zipcode: fields.address_zipcode,
           },
           about: {
-            title: fields.title,
-            description: fields.description,
-            tags: fields.tags,
-            leadText: fields.lead_text,
-            cover: fields.cover_url,
-            price: fields.price_type,
             url: fields.url,
             date: fields.date_description,
             pmr: fields.pmr,
             deaf: fields.deaf,
             blind: fields.blind,
+            price: fields.price_type,
           },
         };
         this.setState({
           event,
           isReady: true,
-          id,
         });
       });
   }
@@ -79,40 +75,28 @@ class EventDetails extends Component {
       return <Spinner className="ml-4 mt-4" animation="border" />;
     }
 
-    const { about } = event;
-
     return (
       <Row className="event-detail__container">
         <Col
           xs="12"
           className="event-detail__head"
           style={{
-            backgroundImage: `url('${about.cover}')`,
+            backgroundImage: `url('${event.cover}')`,
           }}
         >
-          <h3 className="event-detail__title">{about.title}</h3>
+          <h3 className="event-detail__title">{event.title}</h3>
         </Col>
         <Col xs="7" className="mt-4">
-          <h5 className="mb-4">{about.leadText}</h5>
-          {Parser(about.description)}
+          <h5 className="mb-4">{event.leadText}</h5>
+          {Parser(event.description)}
         </Col>
-        <Col xs="1">{' '}</Col>
+        <Col xs="1" />
         <Col xs="4">
           <Col className="event-detail__right-block px-4 py-3" xs="12">
-            <h5 className="mb-3">A propos</h5>
-            <Col xs="12" className="mb-3 event-detail__price">
-              <Cash className="mr-3" />
-              <span>{about.price}</span>
-            </Col>
-            <Col xs="12" className="mb-3 event-detail__date">
-              <CalendarDate className="mr-3" />
-              <div>
-                {Parser(about.date)}
-              </div>
-            </Col>
+            <EventDetailsAbout about={event.about} />
             <EventDetailsLocation address={event.address} />
             <EventDetailsContact contact={event.contact} />
-            <Tags tags={about.tags} />
+            <Tags tags={event.tags} />
           </Col>
         </Col>
       </Row>
