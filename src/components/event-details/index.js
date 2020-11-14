@@ -80,7 +80,7 @@ class EventDetails extends Component {
       <Row className="event-detail__container">
         <EventDetailsHead title={event.title} cover={event.cover} />
         <Col xs="7" className="mt-4">
-          <h5 className="mb-4">{event.leadText}</h5>
+          <h5 className="mb-4 mt-4">{event.leadText}</h5>
           {Parser(event.description)}
         </Col>
         <Col xs="1" />
