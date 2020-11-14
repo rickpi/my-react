@@ -10,13 +10,18 @@ import Criteria from '../criteria';
 import Event from '../event';
 import url from '../../constants/url';
 
+const formatPrice = (free) => (free ? '&refine.price_type=gratuit' : '');
+
 const formatAccess = (access) => {
   const value = Object.values(access)[0] ? 1 : 0;
   const key = Object.keys(access)[0];
 
-  if (value === 1) return `&refine.${key}=${value}`;
-  return '';
+  return value === 1 ? `&refine.${key}=${value}` : '';
 };
+
+const formatCategory = (category) => (
+  category !== '' ? `&refine.category=${encodeURI(category)}` : ''
+);
 
 class Advanced extends Component {
   constructor(props) {
@@ -30,13 +35,32 @@ class Advanced extends Component {
   }
 
   search(criteria) {
-    const { pmr, deaf, blind } = criteria;
-    const query = `${url}&rows=6&q=${formatAccess({ pmr })}${formatAccess({ deaf })}${formatAccess({ blind })}`;
+    const {
+      pmr,
+      deaf,
+      blind,
+      free,
+      rows,
+      date,
+      category,
+    } = criteria;
+    const query = `\
+      ${url}\
+      &rows=${rows}\
+      &q=${date}\
+      ${formatAccess({ pmr })}\
+      ${formatAccess({ deaf })}\
+      ${formatAccess({ blind })}\
+      ${formatPrice(free)}\
+      ${formatCategory(category)}`
+      .replace(/ /g, '');
 
     console.log(query);
 
     this.setState({
       isSearching: true,
+      isReady: false,
+      events: [],
     });
     axios.get(query)
       .then((res) => {
