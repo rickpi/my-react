@@ -15,15 +15,18 @@ class Criteria extends Component {
       pmr: false,
       blind: false,
       deaf: false,
+      free: false,
       category: '',
       date: '',
+      rows: 10,
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
     this.emptyDate = this.emptyDate.bind(this);
+    this.handleRowsChange = this.handleRowsChange.bind(this);
   }
 
-  handleChange(target) {
+  handleCheckboxChange(target) {
     const { id, checked } = target;
 
     this.setState({
@@ -54,13 +57,21 @@ class Criteria extends Component {
     });
   }
 
+  handleRowsChange(rows) {
+    this.setState({
+      rows,
+    });
+  }
+
   render() {
     const {
       pmr,
       blind,
       deaf,
+      free,
       category,
       date,
+      rows,
     } = this.state;
     const { search } = this.props;
     const selected = category === '' ? 'noCategory' : category;
@@ -112,14 +123,23 @@ class Criteria extends Component {
               ))}
             </Form.Control>
           </Form.Group>
+          <Form.Group controlId="price">
+            <Form.Check
+              type="checkbox"
+              label="Gratuit"
+              checked={free}
+              onChange={(event) => {
+                this.handleCheckboxChange(event.target);
+              }}
+            />
+          </Form.Group>
           <Form.Group controlId="pmr">
             <Form.Check
               type="checkbox"
               label="Accès PMR"
               checked={pmr}
               onChange={(event) => {
-                const { target } = event;
-                this.handleChange(target);
+                this.handleCheckboxChange(event.target);
               }}
             />
           </Form.Group>
@@ -129,8 +149,7 @@ class Criteria extends Component {
               label="Accès mal voyant"
               checked={blind}
               onChange={(event) => {
-                const { target } = event;
-                this.handleChange(target);
+                this.handleCheckboxChange(event.target);
               }}
             />
           </Form.Group>
@@ -140,8 +159,17 @@ class Criteria extends Component {
               label="Accès mal entendant"
               checked={deaf}
               onChange={(event) => {
-                const { target } = event;
-                this.handleChange(target);
+                this.handleCheckboxChange(event.target);
+              }}
+            />
+          </Form.Group>
+          <Form.Group controlId="rows">
+            <Form.Label>Nombre de résultats</Form.Label>
+            <Form.Control
+              type="number"
+              value={rows}
+              onChange={(event) => {
+                this.handleRowsChange(event.target.value);
               }}
             />
           </Form.Group>
