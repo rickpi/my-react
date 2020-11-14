@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Jumbotron,
-  Image,
   Row,
   Col,
   Button,
@@ -16,8 +14,15 @@ import {
 import axios from 'axios';
 
 import Tags from '../tags';
+import './event-details.css';
 
 import url from '../../constants/url';
+
+const ExportButton = ({ variant, href, value }) => (
+  <Button size="sm" variant={variant} href={href} className="mr-1">
+    {value}
+  </Button>
+);
 
 class EventDetails extends Component {
   constructor(props) {
@@ -52,13 +57,12 @@ class EventDetails extends Component {
             zipcode: fields.address_zipcode,
           },
           about: {
-            price: fields.price_detail,
             title: fields.title,
             description: fields.description,
             tags: fields.tags,
             leadText: fields.lead_text,
             cover: fields.cover_url,
-            priceType: fields.price_type,
+            price: fields.price_type,
             url: fields.url,
             date: fields.date_description,
           },
@@ -75,67 +79,67 @@ class EventDetails extends Component {
     const { event, isReady } = this.state;
 
     if (!isReady) {
-      return <Spinner className="ml-4 mb-4" animation="border" />;
+      return <Spinner className="ml-4 mt-4" animation="border" />;
     }
+
     const { contact, address, about } = event;
 
     return (
-      <Jumbotron className="mt-4">
-        <h2 className="mb-4">{about.title}</h2>
-        <Row>
-          <Col xs="6">
-            <h5 className="mt-2 mb-4">{about.leadText}</h5>
-            <p>{Parser(about.description)}</p>
+      <Row className="event-detail__container">
+        <Col
+          xs="12"
+          className="event-detail__head"
+          style={{
+            backgroundImage: `url('${about.cover}')`,
+          }}
+        >
+          <h3 className="event-detail__title">{about.title}</h3>
+        </Col>
+        <Col xs="7" className="mt-4">
+          <h5 className="mb-4">{about.leadText}</h5>
+          <p>{Parser(about.description)}</p>
+        </Col>
+        <Col xs="1">{' '}</Col>
+        <Col className="event-detail__right-block" xs="4">
+          <h5 className="mb-3">A propos</h5>
+          <Col xs="12" className="mb-3 event-detail__price">
+            <Cash className="mr-3" />
+            <span>{about.price}</span>
           </Col>
-          <Col xs="1">{' '}</Col>
-          <Col xs="5">
-            <Image className="mb-4" fluid src={about.cover} />
-            <h5 className="mb-3">A propos</h5>
-            <Row className="mb-3">
-              <Col xs="2">
-                <h2><Cash /></h2>
-              </Col>
-              <Col xs="10">{about.price}</Col>
-            </Row>
-            <Row className="mb-3">
-              <Col xs="2">
-                <h2><CalendarDate /></h2>
-              </Col>
-              <Col xs="10">{Parser(about.date)}</Col>
-            </Row>
-            <h5 className="mb-3 mt-4">Localisation</h5>
-            <h6>{address.name}</h6>
-            <p className="mb-3">
-              {Parser(`<strong>${address.city}</strong><br/>${address.zipcode}, ${address.street}`)}
-            </p>
-            <h5 className="mb-3 mt-4">Contact</h5>
-            <h6>{contact.name}</h6>
-            <Row className="mb-3">
-              <Col xs="1">
-                <h5><Envelope /></h5>
-              </Col>
-              <Col xs="11">{Parser(`<strong>${contact.mail}</strong>`)}</Col>
-            </Row>
-            <Row className="mb-3">
-              <Button size="sm" variant="primary" href={contact.facebook} className="ml-2 mr-1">
-                FACEBOOK
-              </Button>
-              <Button size="sm" variant="info" href={contact.twitter}>TWITTER</Button>
-            </Row>
+          <Col xs="12" className="mb-3 event-detail__date">
+            <CalendarDate className="mr-3" />
+            <div>
+              {Parser(about.date)}
+            </div>
+          </Col>
+          <h5 className="mb-3 mt-4">Localisation</h5>
+          <Col xs="12" className="mb-3">
+            {Parser(`\
+              ${address.name}\
+              <br/>\
+              <strong>${address.city}</strong>\
+              <br/>\
+              ${address.zipcode}, ${address.street}\
+            `)}
+          </Col>
+          <h5 className="mb-3 mt-4">Contact</h5>
+          <Col xs="12">{contact.name}</Col>
+          <Col xs="12" className="mb-3">
+            <Envelope className="mr-2" />
+            {Parser(`<strong>${contact.mail}</strong>`)}
+          </Col>
+          <Col xs="12" className="mb-2">
             <Row>
-              <Button size="sm" variant="secondary" href={contact.url} className="ml-2">
-                Voir le site
-              </Button>
+              <ExportButton variant="primary" href={contact.facebook} value="FACEBOOK" />
+              <ExportButton variant="info" href={contact.twitter} value="TWITTER" />
+              <ExportButton variant="secondary" href={contact.url} value="SITE" />
             </Row>
           </Col>
-        </Row>
-        <Row>
-          <Col xs="7">{' '}</Col>
-          <Col xs="5">
+          <Col xs="12">
             <Tags tags={about.tags} />
           </Col>
-        </Row>
-      </Jumbotron>
+        </Col>
+      </Row>
     );
   }
 }
