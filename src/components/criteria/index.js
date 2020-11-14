@@ -123,7 +123,7 @@ class Criteria extends Component {
               ))}
             </Form.Control>
           </Form.Group>
-          <Form.Group controlId="price">
+          <Form.Group controlId="free">
             <Form.Check
               type="checkbox"
               label="Gratuit"
