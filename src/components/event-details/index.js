@@ -14,7 +14,7 @@ import EventDetailsLocation from '../event-details-location';
 import EventDetailsContact from '../event-details-contact';
 import Tags from '../tags';
 
-import url from '../../constants/url';
+import BASE_URL from '../../constants/BASE_URL';
 
 class EventDetails extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class EventDetails extends Component {
 
   componentDidMount() {
     const { id } = this.state;
-    axios.get(`${url}&refine.recordid=${id}`)
+    axios.get(`${BASE_URL}&refine.recordid=${id}`)
       .then((res) => {
         const { records } = res.data;
         const { fields } = records[0];
