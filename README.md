@@ -6,6 +6,8 @@ This app is a school project for **My Digital School**.
 The aim of this project is to create a search engine for **events in Paris and in its surroundings**.
 ### API
 This app gets datas from an API **open data** [**[https://opendata.paris.fr]**](https://opendata.paris.fr)
+### Bootstrap React
+The entire app is styled with [Bootstrap React](https://react-bootstrap.github.io/)
 ### How To Use
 You need to have **node** installed in version 12 and **npm** install in version 6 , to check :
 
