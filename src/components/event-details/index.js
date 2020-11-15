@@ -41,7 +41,7 @@ class EventDetails extends Component {
           cover: fields.cover_url,
           contact: {
             name: fields.contact_name,
-            link: fields.contact_url,
+            site: fields.contact_url,
             phone: fields.contact_phone,
             facebook: fields.contact_facebook,
             mail: fields.contact_mail,

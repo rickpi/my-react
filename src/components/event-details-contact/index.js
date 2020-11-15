@@ -25,13 +25,13 @@ const EventDetailsContact = ({ contact }) => {
     );
   }
   const facebook = contact.facebook
-    ? <ExportButton variant="info" href={contact.facebook} value="FACEBOOK" />
+    ? <ExportButton variant="primary" href={contact.facebook} value="FACEBOOK" />
     : null;
   const twitter = contact.twitter
     ? <ExportButton variant="info" href={contact.twitter} value="TWITTER" />
     : null;
   const site = contact.site
-    ? <ExportButton variant="info" href={contact.site} value="SITE" />
+    ? <ExportButton variant="secondary" href={contact.site} value="SITE" />
     : null;
 
   return (
