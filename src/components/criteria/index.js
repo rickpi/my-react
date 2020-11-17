@@ -52,15 +52,15 @@ class Criteria extends Component {
     });
   }
 
-  emptyDate() {
-    this.setState({
-      date: '',
-    });
-  }
-
   handleRowsChange(rows) {
     this.setState({
       rows,
+    });
+  }
+
+  emptyDate() {
+    this.setState({
+      date: '',
     });
   }
 

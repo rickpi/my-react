@@ -64,6 +64,35 @@ class ToDoInParis extends Component {
       });
   }
 
+  handleTagsFilter(selectedTags) {
+    const { query } = this.state;
+
+    this.setState({
+      events: [],
+      isReady: false,
+      tags: selectedTags,
+      query,
+    });
+    axios.get(`${BASE_URL}&rows=6&q=${encodeURI(query)}&${formatTags(selectedTags)}`)
+      .then((res) => {
+        const newEvents = res.data.records.map(({ recordid, fields }) => ({
+          title: fields.title,
+          leadText: fields.lead_text,
+          coverUrl: fields.cover_url,
+          tags: fields.tags,
+          priceType: fields.price_type,
+          addressCity: fields.address_city,
+          id: recordid,
+        }));
+        this.setState({
+          events: newEvents,
+          isReady: true,
+          tags: selectedTags,
+          query,
+        });
+      });
+  }
+
   moreEvents() {
     const { events, tags, query } = this.state;
     const nbEvents = events.length;
@@ -89,35 +118,6 @@ class ToDoInParis extends Component {
           events: events.concat(newEvents),
           isReady: true,
           tags,
-          query,
-        });
-      });
-  }
-
-  handleTagsFilter(selectedTags) {
-    const { query } = this.state;
-
-    this.setState({
-      events: [],
-      isReady: false,
-      tags: selectedTags,
-      query,
-    });
-    axios.get(`${BASE_URL}&rows=6&q=${encodeURI(query)}&${formatTags(selectedTags)}`)
-      .then((res) => {
-        const newEvents = res.data.records.map(({ recordid, fields }) => ({
-          title: fields.title,
-          leadText: fields.lead_text,
-          coverUrl: fields.cover_url,
-          tags: fields.tags,
-          priceType: fields.price_type,
-          addressCity: fields.address_city,
-          id: recordid,
-        }));
-        this.setState({
-          events: newEvents,
-          isReady: true,
-          tags: selectedTags,
           query,
         });
       });
